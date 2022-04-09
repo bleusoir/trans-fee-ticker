@@ -5,7 +5,9 @@ Transaction fee ticker for [Upbit](https://upbit.com) made with [Nest](https://g
 ## Installation
 
 ### Prerequisites
-`UPBIT_API_TOKEN` environment variables. you should add environment variables.
+
+`UPBIT_API_TOKEN`, `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASS`, `DB_NAME` environment variables. you should add
+environment variables.
 
 ```bash
 $ npm install
