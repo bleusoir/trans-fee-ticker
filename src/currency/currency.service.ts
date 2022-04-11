@@ -23,7 +23,7 @@ export class CurrencyService {
 
     const makedUrl = `https://api.upbit.com/v1/ticker?markets=${id}`;
     const data = await lastValueFrom(this.httpService.get(makedUrl).pipe(
-      map(resp => resp.data),
+      map(res => res.data),
     ));
 
     log(data[0]);

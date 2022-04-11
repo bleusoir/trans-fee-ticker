@@ -4,17 +4,18 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { CurrencyModule } from './currency/currency.module';
 import { DatabaseModule } from './database/database.module';
-import { CodesModule } from './codes/codes.module';
+import { ExchangeModule } from './exchange/exchange.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     CurrencyModule,
     DatabaseModule,
-    CodesModule,
+    ExchangeModule,
+    ScheduleModule.forRoot()
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-}
+export class AppModule {}
