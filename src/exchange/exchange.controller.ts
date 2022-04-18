@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ExchangeService } from './exchange.service';
 import { CreateExchangeDto } from './dto/create-exchange.dto';
 import { UpdateExchangeDto } from './dto/update-exchange.dto';
@@ -13,6 +13,11 @@ export class ExchangeController {
   }
 
   @Get()
+  getExchangeSchedule() {
+    return this.exchangeService.getExchangeTask();
+  }
+
+  @Get('/all')
   findAll() {
     return this.exchangeService.findAll();
   }
