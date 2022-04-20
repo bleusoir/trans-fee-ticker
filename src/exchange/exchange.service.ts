@@ -3,12 +3,15 @@ import { CreateExchangeDto } from './dto/create-exchange.dto';
 import { UpdateExchangeDto } from './dto/update-exchange.dto';
 import { Cron } from '@nestjs/schedule';
 import { HttpService } from '@nestjs/axios';
-import { lastValueFrom, map, Observable } from 'rxjs';
-import { AxiosResponse } from 'axios';
+import { lastValueFrom, map } from 'rxjs';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Exchange } from './entities/exchange.entity';
 
 @Injectable()
 export class ExchangeService {
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService,
+              @InjectRepository(Exchange) private exchangeRepository: Repository<Exchange>) {
   }
 
   private readonly KRWUSD_URL = 'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD';
@@ -22,7 +25,20 @@ export class ExchangeService {
   async getExchangeTask() {
     this.logger.debug('executed!');
 
-    return await lastValueFrom(this.httpService.get(this.KRWUSD_URL).pipe(map(res => res.data)));
+    const exchangeJson = await lastValueFrom(this.httpService.get(this.KRWUSD_URL).pipe(map(res => res.data)));
+
+    this.logger.debug({ exchangeJson });
+
+    const saveResult = await this.exchangeRepository.save({
+      id: null,
+      code: exchangeJson[0].code,
+      price: exchangeJson[0].basePrice,
+      trade_time: `${exchangeJson[0].date} ${exchangeJson[0].time}`,
+    });
+
+    this.logger.debug({ saveResult });
+
+    return saveResult;
   }
 
   findAll() {

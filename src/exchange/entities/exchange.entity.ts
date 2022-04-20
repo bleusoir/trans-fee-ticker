@@ -13,6 +13,9 @@ export class Exchange {
   @Column({ type: 'float' })
   public price: number;
 
+  @Column({ type: 'timestamp' })
+  public trade_time: Date;
+
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(3)' })
   public created: Date;
 
