@@ -30,18 +30,19 @@ export class CurrencyController {
   @Get('test')
   async test() {
 
+    const result = [];
     const codes = await this.codeService.findAll();
-
     for (const code of codes) {
 
       const index = codes.indexOf(code);
-      const curr = await this.currencyService.findTicker(`KRW-${code.code}`);
-      await sleep(1000);
+      const curr = await this.currencyService.findTicker(`${code.code}`);
+      await sleep(100);
 
       log(index, code.code, curr);
+      result.push(curr);
     }
 
-    return codes;
+    return result;
   }
 
   @Get(':id')

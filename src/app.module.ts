@@ -6,6 +6,7 @@ import { CurrencyModule } from './currency/currency.module';
 import { DatabaseModule } from './database/database.module';
 import { ExchangeModule } from './exchange/exchange.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { ScheduleModule } from '@nestjs/schedule';
     CurrencyModule,
     DatabaseModule,
     ExchangeModule,
-    ScheduleModule.forRoot()
+    ScheduleModule.forRoot(),
+    TransactionModule
   ],
   controllers: [AppController],
   providers: [AppService],
