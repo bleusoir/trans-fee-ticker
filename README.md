@@ -6,7 +6,8 @@ Transaction fee ticker for [Upbit](https://upbit.com) made with [Nest](https://g
 
 ### Prerequisites
 
-`UPBIT_API_TOKEN`, `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASS`, `DB_NAME` environment variables. you should add
+`UPBIT_API_TOKEN`, `UPBIT_API_SECRET`, `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASS`, `DB_NAME` environment variables. you
+should add
 environment variables.
 
 ```bash
